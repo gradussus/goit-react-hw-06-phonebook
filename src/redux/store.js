@@ -11,8 +11,8 @@ import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
     reducer: {
-      contacts: contactsReducer,
-      filter: filterReducer,
+    //   contacts: contactsReducer,
+    //   filter: filterReducer,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
