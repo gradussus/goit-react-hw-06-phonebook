@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { AddContactForm } from './ContactForm.styled';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-export const ContactForm = ({ addContact }) => {
+import { addContact, getContacts } from 'redux/contactsSlice';
+
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
 
@@ -17,7 +23,7 @@ export const ContactForm = ({ addContact }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    addContact(contactName, contactNumber);
+    dispatch(addContact({ contactName, contactNumber }));
     setContactName('');
     setContactNumber('');
   };

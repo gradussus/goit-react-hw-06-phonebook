@@ -4,6 +4,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList ';
 import { Filter } from './Filter/Filter';
 import { Container } from './App.styled';
+import { useDispatch } from 'react-redux';
 
 export const App = () => {
   const [contacts, setContacts] = useState(
@@ -17,34 +18,32 @@ export const App = () => {
   );
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
-  const addContact = (name, number) => {
-    const includeName = name => {
-      return contacts.find(
-        e => e.name.toLocaleLowerCase() === name.toLocaleLowerCase()
-      );
-    };
-    const includeNumber = number => {
-      return contacts.find(e => e.number === number);
-    };
-
-    const contact = {
-      id: nanoid(10),
-      name,
-      number,
-    };
-    if (includeName(contact.name)) {
-      return alert(`${contact.name} is already in contacts`);
-    }
-    if (includeNumber(contact.number)) {
-      return alert(`${contact.number} is already in contacts`);
-    }
-
-    setContacts(prevState => [contact, ...prevState]);
-  };
+  // const addContact = (name, number) => {
+  // const includeName = name => {
+  //   return contacts.find(
+  //     e => e.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+  //   );
+  // };
+  // const includeNumber = number => {
+  //   return contacts.find(e => e.number === number);
+  // };
+  // const contact = {
+  //   id: nanoid(10),
+  //   name,
+  //   number,
+  // };
+  // if (includeName(contact.name)) {
+  //   return alert(`${contact.name} is already in contacts`);
+  // }
+  // if (includeNumber(contact.number)) {
+  //   return alert(`${contact.number} is already in contacts`);
+  // }
+  // setContacts(prevState => [contact, ...prevState]);
+  // };
 
   const deleteContact = e => {
     const id = e.currentTarget.id;
@@ -65,7 +64,7 @@ export const App = () => {
   return (
     <Container>
       <h1>Phonebook</h1>
-      <ContactForm addContact={addContact} />
+      <ContactForm />
       <h2>Contacts</h2>
 
       {contacts.length !== 0 ? (
