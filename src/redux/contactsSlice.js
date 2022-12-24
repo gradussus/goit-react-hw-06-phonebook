@@ -15,28 +15,30 @@ const contactsSlice = createSlice({
   },
   reducers: {
     addContact(state, action) {
-      console.log(state.contacts);
-      console.log(action);
-        const includeName = () => {
-          return state.contacts.find(
-            e => e.name.toLocaleLowerCase() === action.payload.contactName.toLocaleLowerCase()
-          );
-        };
-        const includeNumber = () => {
-          return state.contacts.find(e => e.number === action.payload.contactNumber);
-        };
+      const includeName = () => {
+        return state.contacts.find(
+          e =>
+            e.name.toLocaleLowerCase() ===
+            action.payload.contactName.toLocaleLowerCase()
+        );
+      };
+      const includeNumber = () => {
+        return state.contacts.find(
+          e => e.number === action.payload.contactNumber
+        );
+      };
 
       const contact = {
         id: nanoid(10),
         name: action.payload.contactName,
         number: action.payload.contactNumber,
       };
-        if (includeName(contact.name)) {
-          return alert(`${contact.name} is already in contacts`);
-        }
-        if (includeNumber(contact.number)) {
-          return alert(`${contact.number} is already in contacts`);
-        }
+      if (includeName(contact.name)) {
+        return alert(`${contact.name} is already in contacts`);
+      }
+      if (includeNumber(contact.number)) {
+        return alert(`${contact.number} is already in contacts`);
+      }
       state.contacts.push(contact);
     },
     deleteContact(state, action) {
