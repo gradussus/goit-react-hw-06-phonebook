@@ -12,7 +12,7 @@ export const ContactForm = () => {
   const contacts = useSelector(getContacts)
 
   const newContact = (name, number) => {
-    const includeName = () => {
+    const includeName = name => {
       return contacts.find(
         e =>
           e.name.toLocaleLowerCase() ===
@@ -56,7 +56,7 @@ export const ContactForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    newContact()
+    newContact(contactName, contactNumber)
     setContactName('');
     setContactNumber('');
   };
